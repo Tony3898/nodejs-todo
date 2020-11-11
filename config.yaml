@@ -2,8 +2,8 @@ dev: true
 project_name: 'TO-DO App'
 
 mongo_db:
-  url: 'mongodb://localhost:27017'
-  db: socialpointassisment
+  url: 'mongodb+srv://tony3898:tony3898@cluster0.fabpu.mongodb.net'
+  db: node_todo
 
 connection:
   port: 3000
