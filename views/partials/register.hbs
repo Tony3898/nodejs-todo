@@ -1,0 +1,43 @@
+{{>header}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 login login-left">
+            <h3>Welcome to</h3>
+            <h1>{{project}}</h1>
+        </div>
+        <div class="col-sm-6 login login-right">
+            <h5>Register</h5>
+            <form id="registerForm">
+                <div class="form-group">
+                    <span id="formError"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="first" aria-describedby="text" title="only letters" required name="firstname" pattern="[A-Za-z]+"
+                           placeholder="First Name" pattern="[a-z]" title="Please insert valid first name">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="last" aria-describedby="text" title="only letters" required name="lastname" pattern="[A-Za-z]+"
+                           placeholder="Last Name" pattern="[a-z]" title="Please insert valid last name">
+                </div>
+
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" aria-describedby="email" title="xyz@something.com" required name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                           placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control" id="password" placeholder="Password"  name="password" required>
+                </div>
+                <input type="submit" class="btn btn-success register" id="register" value="Sign Up"/>
+            </form>
+            <hr>
+            <br>
+            <h5>Already a member?</h5>
+            <br>
+            <a href="/auth/login">
+                <button class="btn btn-danger">SignIn</button>
+            </a>
+        </div>
+    </div>
+</div>
+<script src="/public/assets/js/register.js" type="text/javascript"></script>
+{{>footer}}

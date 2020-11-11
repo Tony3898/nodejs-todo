@@ -1,0 +1,33 @@
+{{>header}}
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 login login-left">
+            <h3>Welcome to</h3>
+            <h1>{{project}}</h1>
+        </div>
+        <div class="col-sm-6 login login-right">
+            <h5>Login</h5>
+            <form method="post" action="/auth/login">
+                <div class="form-group">
+                    <span id="formError" class="error-text">{{messages.error}}</span>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" id="email" aria-describedby="email" title="xyz@something.com" required name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
+                           placeholder="Email">
+                </div>
+                <div class="form-group">
+                    <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control" id="password" placeholder="Password"  name="password" required>
+                </div>
+                <button type="submit" class="btn btn-success">Sign In</button>
+            </form>
+            <hr>
+            <br>
+            <h5>New member?</h5>
+            <br>
+            <a href="/auth/register">
+                <button class="btn btn-danger">SignUp</button>
+            </a>
+        </div>
+    </div>
+</div>
+{{>footer}}

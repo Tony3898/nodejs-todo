@@ -1,0 +1,53 @@
+{
+  "name": "@tony3898/socialpointassisment",
+  "version": "1.0.0",
+  "description": "socialpointassisment",
+  "main": "server.js",
+  "author": "Tejas Rana <contact@tejasrana.in> (https://tejasrana.in/)",
+  "license": "MIT",
+  "scripts": {
+    "start:server": "nodemon server",
+    "start:ui": "webpack --watch",
+    "build:ui": "webpack --mode production",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/Tony3898/socialpointassisment.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "files": [
+    "package.json",
+    "README.md",
+    "LICENSE",
+    "server.js"
+  ],
+  "bugs": {
+    "url": "https://github.com/Tony3898/socialpointassisment/issues"
+  },
+  "homepage": "https://github.com/Tony3898/socialpointassisment",
+  "keywords": [
+    "socialpointassisment"
+  ],
+  "dependencies": {
+    "chalk": "^4.1.0",
+    "js-yaml": "^3.14.0",
+    "mongodb": "^3.6.2",
+    "slug": "^3.3.4",
+    "uuid": "^8.3.0",
+    "axios": "^0.20.0",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "express-flash": "^0.0.2",
+    "express-session": "^1.17.1",
+    "hbs": "^4.1.1",
+    "morgan": "^1.10.0",
+    "passport": "^0.4.1",
+    "bluebird": "^3.7.2",
+    "passport-local": "^1.0.0"
+  }
+}
