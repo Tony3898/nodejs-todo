@@ -128,7 +128,7 @@ h1, h2, h3, h4, h5, h6 {
     padding: 32px;
 }
 
-.login-right form button,.login-right form .register {
+.login-right form button, .login-right form .register {
     float: right;
 }
 
@@ -151,10 +151,44 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--accent);
 }
 
-.todo-table
-{
-    font-family: Roboto, serif;
-    background: var(--text);
-    height: 100vh;
-    color: var(--main-bg-color);
+.todo-list {
+    background: var(--main-bg-color);
+    color: var(--text);
+    display: flex;
+    padding: 16px;
 }
+
+.todo-list ul {
+
+}
+
+.todo-list-li {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--primary);
+    padding: 8px;
+    border: 5px solid var(--main-bg-color);
+}
+
+.todo-list-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-list-right {
+    font-family: Roboto, sans-serif;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.todo-list-right .btn {
+    margin-right: 8px;
+}
+

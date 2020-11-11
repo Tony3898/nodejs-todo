@@ -30,7 +30,9 @@ let authRoute = (passport) => {
         } catch (e) {
           res.status(404).json({type: 'error', message: e.message})
         }
-      })
+      }).get('/logout', auth.checkAuth, ((req, res, next) => {
+        auth.logout(req, res)
+      }))
 }
 
 module.exports = authRoute

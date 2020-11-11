@@ -3,7 +3,7 @@ const Promise = require("bluebird");
 const router = express.Router();
 const path = require('path')
 const readFile = Promise.promisify(require("fs").readFile);
-const auth = require("./auth")
+const auth = require("../users/auth")
 
 const renderHtml = (req, res) => {
   let pagePath = req.url;
@@ -20,7 +20,8 @@ const renderHtml = (req, res) => {
       nav: nav ? nav : null,
       html: html,
       project: Tony.Config.project_name,
-      query: req.query
+      query: req.query,
+      loggedIn: auth.isAuthenticated(req)
     });
   }).catch(err => {
     if (err.code === 'ENOENT')

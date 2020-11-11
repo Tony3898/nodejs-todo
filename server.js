@@ -6,6 +6,7 @@ require('./src/misc/config')
 const express = require("express")
 const auth = require("./src/users/auth")
 const users = require('./src/users/users')
+const mongo = require("./src/db/mongo")
 const path = require("path")
 const initializePassport = require('./src/passport/passport-config')
 const cors = require('cors');
@@ -24,7 +25,7 @@ initializePassport(passport)
 
 //init default classes for api calls
 global.APICLASSES = {users, auth}
-
+require("./src/index")
 // setup express app
 app.use(flash())
 app.use(session({
@@ -62,7 +63,4 @@ app.set('port', Tony.Config.connection.port)
 app.listen(Tony.Config.connection.port, () => {
   console.log(info("listening on http://" + Tony.Config.connection.host + ":" + Tony.Config.connection.port))
 })
-
-
-module.exports = app
 

@@ -10,7 +10,5 @@ connection:
   host: localhost
 
 nav:
-  - name: 'All Todo'
-    path: '/app/todo/home'
   - name: 'New Todo'
     path: '/app/todo/new-todo'

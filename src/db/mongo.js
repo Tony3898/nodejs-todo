@@ -36,8 +36,10 @@ class Mongo {
   async connect() {
     try {
       this.init()
-      this.client = await MongoClient.connect(this.connectionUrl, {useUnifiedTopology: true})
-      this.db = this.client.db();
+      this.client = await MongoClient.connect(this.connectionUrl, {
+        useNewUrlParser: true, useUnifiedTopology: true,
+      })
+      this.db = this.client.db(this.database);
       return this.client;
     } catch (e) {
       (error(e.message))
@@ -82,32 +84,6 @@ class Mongo {
         }
       } else {
         throw new Error('please provide _id for insertions of data')
-      }
-    } catch (e) {
-      throw new Error(e.message)
-    }
-  }
-
-  async getLastDocument(key) {
-    try {
-      if (!key)
-        throw new Error('Key is missing!!')
-      let matchQuery = {sort: {}, limit: 1}
-      matchQuery['sort'][key] = -1
-      return await this.find(matchQuery)
-    } catch (e) {
-      throw new Error(e.message)
-    }
-  }
-
-  async getDocIdFromLastDocument(key, splitter = 0, spiltPart = 1, init = 1) {
-    try {
-      let data = await this.getLastDocument(key)
-      if (data && data.length) {
-        data = data[0]
-        return splitter <= 0 ? parseInt(data[key]) + 1 : parseInt(data[key].split(splitter)[spiltPart]) + 1
-      } else {
-        return init
       }
     } catch (e) {
       throw new Error(e.message)
