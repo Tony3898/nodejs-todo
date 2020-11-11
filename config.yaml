@@ -1,4 +1,4 @@
-dev: true
+dev: false
 project_name: 'TO-DO App'
 
 mongo_db:

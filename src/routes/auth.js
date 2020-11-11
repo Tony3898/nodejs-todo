@@ -32,7 +32,16 @@ let authRoute = (passport) => {
         }
       }).get('/logout', auth.checkAuth, ((req, res, next) => {
         auth.logout(req, res)
-      }))
+      })).get('/profile', auth.checkAuth, (req, res, next) => {
+        console.log(auth.isAuthenticated(req))
+        res.render('profile.hbs', {
+          project: Tony.Config.project_name,
+          title: 'Profile',
+          nav: Tony.Config.nav ? Tony.Config.nav : null,
+          loggedIn: auth.isAuthenticated(req),
+          username: Tony.Session && Tony.Session.username ? Tony.Session.username : null
+        })
+      })
 }
 
 module.exports = authRoute

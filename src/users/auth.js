@@ -9,6 +9,7 @@ class Auth {
       if (options.password.trim().length < 8)
         throw new Error("Password length is too short")
       await users.connect()
+      options.status = 1
       options.email = options.email.toLowerCase()
       let user = await users.getUserBy("email", options.email)
       if (user && user.length) {
@@ -103,7 +104,9 @@ class Auth {
           firstname: userdata.firstname,
           lastname: userdata.lastname,
           email: userdata.email,
-          username: userdata.username
+          username: userdata.username,
+          status: userdata.status,
+          phone: userdata.phone
         }
       } else if (Tony.Config.dev) {
         return {

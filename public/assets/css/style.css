@@ -122,6 +122,28 @@ h1, h2, h3, h4, h5, h6 {
     color: var(--primary);
 }
 
+.user-img-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-content: center;
+    color: #FFF;
+    background: var(--secondary);
+    width: 100%;
+    padding: 16px;
+    border-radius: 5px;
+    margin-bottom: 16px;
+}
+
+.user-img-container h1 {
+    color: #FFF;
+}
+
+.table
+{
+    color: var(--text);
+}
+
 
 .login-right form {
     width: 80%;

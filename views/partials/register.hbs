@@ -25,6 +25,10 @@
                            placeholder="Email">
                 </div>
                 <div class="form-group">
+                    <input type="text" class="form-control" id="email" aria-describedby="Phone" required name="phone" pattern="^\d{10}$" title="10 numeric characters only"
+                           placeholder="Phone">
+                </div>
+                <div class="form-group">
                     <input type="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="at least one number and one uppercase and lowercase letter, and at least 8 or more characters" class="form-control" id="password" placeholder="Password"  name="password" required>
                 </div>
                 <input type="submit" class="btn btn-success register" id="register" value="Sign Up"/>
