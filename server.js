@@ -58,6 +58,12 @@ app.get("/notfound", (req, res, next) => {
   res.render('404.hbs')
 })
 
+if (Tony.Config.dev) {
+  Tony.Session = {
+    email: 'tejasrana30898@gmail.com',
+    username: 'tony3898'
+  }
+}
 // listen app
 app.set('port', Tony.Config.connection.port)
 app.listen(Tony.Config.connection.port, () => {

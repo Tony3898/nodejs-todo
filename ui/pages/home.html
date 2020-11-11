@@ -1,21 +1,54 @@
 <div class="row todo-list">
-    <div class="col-sm-12">
-        <ul class="todo-list-ul">
-            <li class="todo-list-li">
-                <div class="todo-list-left">
-                    <h3>Title</h3>
-                    <p>Descr</p>
-                </div>
-                <div class="todo-list-right">
-                    <button class="btn btn-info"><i class="fas fa-pen"></i></button>
-                    <button class="btn btn-success"><i class="fas fa-check"></i></button>
-                    <button class="btn btn-danger"><i class="fas fa-trash"></i></i></button>
-                </div>
-            </li>
+    <div class="col-sm-12" id="error-div">
+        <div id="todo-list-error" class="todo-list-error">
+            <h5 id="errors">Fetching Data <i class="fas fa-spinner fa-spin loading"></i></h5>
+        </div>
+    </div>
+    <div class="col-sm-12" id="todo-div">
+        <ul class="todo-list-ul" id="todo-list-ul">
         </ul>
     </div>
 </div>
 
 <script>
+  $("#todo-div").hide()
+  fetch('/api/todo.findAll', {
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+  }).then(r => {
+    if (r.status === 404 || r.status === 200) {
+      return r.json()
+    }
+  }).then(function (data) {
+    if (!data || !data.length) {
+      $("#errors").html('No Todos!!!')
+    } else {
+      $("#todo-div").show()
+      $("#error-div").hide()
+      data.forEach(todo => {
+        $("#todo-list-ul").append('<li class="todo-list-li">\n' +
+            '                <div class="todo-list-left">\n' +
+            '                    <h3>' + todo.title + '</h3>\n' +
+            '                    <p>' + todo.desc + '</p>\n' +
+            '                </div>\n' +
+            '                <div class="todo-list-right">\n' +
+            '                    <button class="btn btn-info edit-todo" data-id=' + todo.todo_id + '><i class="fas fa-pen"></i></button>\n' +
+            '                    <button class="btn btn-success check-todo" data-id=' + todo.todo_id + '><i class="fas fa-check"></i></button>\n' +
+            '                    <button class="btn btn-danger delete-todo" data-id=' + todo.todo_id + '><i class="fas fa-trash"></i></i></button>\n' +
+            '                </div>\n' +
+            '            </li>')
+      })
 
+      $('.edit-todo').click(function (e) {
+        e.preventDefault()
+        let todo_id = parseInt($(this).attr('data-id'))
+        window.location.href = '/app/todo/edit-todo?todo_id=' + todo_id
+      })
+    }
+  }).catch(e => {
+    $("#errors").html(e.message)
+  })
 </script>

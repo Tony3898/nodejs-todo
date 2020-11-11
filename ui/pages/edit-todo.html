@@ -1,0 +1,106 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-6 login login-left">
+            <h1>Todo App</h1>
+        </div>
+        <div class="col-sm-6 login login-right">
+            <h5>Update Todo</h5>
+            <form id="edit-todo-form">
+                <div class="form-group">
+                    <span id="formError" class="error-text"></span>
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="title" aria-describedby="text" required name="title"
+                           placeholder="Title" pattern="[a-zA-Z0-9 ]+" title="Please insert valid todo">
+                </div>
+                <div class="form-group">
+                    <input type="text" class="form-control" id="desc" aria-describedby="text" required
+                           name="description"
+                           placeholder="Description" pattern="[a-zA-Z0-9 ]+" title="Please insert valid description">
+                </div>
+                <input type="submit" class="btn btn-success register" id="edit-todo" value="Update Todo"/>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+  $(document).ready(() => {
+    let urlParams = new URLSearchParams(window.location.search);
+    $("#edit-todo").attr('disabled', true).append("<i class=\"fas fa-spinner fa-spin loading\"></i>");
+    $("#formError").text("Fetching Value...")
+    fetch('/api/todo.findAll', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({query: {todo_id: parseInt(urlParams.get('todo_id'))}})
+    }).then(r => {
+      if (r.status === 404 || r.status === 200) {
+        return r.json()
+      }
+    }).then(function (data) {
+      console.log(data)
+      if (!data) {
+        throw new Error('something went wrong!!!')
+      }
+      if (data.length === 0) {
+        $("#edit-todo").hide()
+        throw new Error('Todo not found!!')
+      }
+      $("#title").val(data[0].title)
+      $("#desc").val(data[0].desc)
+      $("#formError").text("")
+      $("#edit-todo").attr('disabled', false)
+      $(".loading").remove();
+    }).catch(e => {
+      $("#formError").text(e.message).css('color', 'red')
+      $("#edit-todo").attr('disabled', false)
+      $(".loading").remove();
+    })
+
+    $("#edit-todo-form").on('submit', e => {
+      e.preventDefault();
+      let title = $("#title").val().trim();
+      let desc = $("#desc").val().trim();
+      $("#edit-todo").attr('disabled', true).append("<i class=\"fas fa-spinner fa-spin loading\"></i>");
+      if (!title.length || !desc.length) {
+        $("#formError").text('Please provide valid Title/Description')
+        $("#edit-todo").attr('disabled', false)
+        $(".loading").remove();
+      } else {
+        fetch('/api/todo.update', {
+              method: 'POST',
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({
+                query: {todo_id: parseInt(urlParams.get('todo_id'))}, update: {title, desc}
+              })
+            }
+        ).then(r => {
+          if (r.status === 404 || r.status === 200) {
+            return r.json()
+          }
+        }).then(function (data) {
+          console.log(data)
+          if (!data) {
+            throw new Error('something went wrong!!!')
+          }
+          if (data.type === 'error') {
+            $("#formError").text(data.message).css('color', 'red')
+          } else {
+            $("#formError").text('TODO udpated successfully!!!').css('color', 'green')
+          }
+          $("#edit-todo").attr('disabled', false)
+          $(".loading").remove();
+        }).catch(e => {
+          $("#formError").text(e.message).css('color', 'red')
+          $("#edit-todo").attr('disabled', false)
+          $(".loading").remove();
+        })
+      }
+    })
+  })
+</script>

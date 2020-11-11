@@ -141,10 +141,14 @@ class Mongo {
 
   async update(options) {
     try {
-      options['meta']['updated'] = Date.now()
+      options['meta'] = {
+        timestamp: {
+          updated: Date.now()
+        }
+      }
       return await this.db.collection(this.collection).updateOne(options.query, {$set: options.update});
     } catch (e) {
-      return e;
+      throw new Error(e.message)
     }
   }
 

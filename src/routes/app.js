@@ -8,8 +8,11 @@ const auth = require("../users/auth")
 const renderHtml = (req, res) => {
   let pagePath = req.url;
   let reqPage = pagePath.split("/todo/")[1]
+  if(reqPage.includes('?'))
+    reqPage = reqPage.split('?')[0]
   let filePath = path.join("ui/pages/" + reqPage + ".html")
   let nav = Tony.Config.nav;
+  console.log(filePath)
   readFile(filePath, 'utf-8').then(html => {
     res.render('page.hbs', {
       title: nav && nav.sub ? nav.sub.filter((data) => {

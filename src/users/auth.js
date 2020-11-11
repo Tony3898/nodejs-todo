@@ -106,10 +106,6 @@ class Auth {
           username: userdata.username
         }
       } else if (Tony.Config.dev) {
-        Tony.Session = {
-          email: 'tejasrana30898@gmail.com',
-          username: 'tony3898'
-        }
         return {
           firstname: 'Tejas',
           lastname: 'Rana',
