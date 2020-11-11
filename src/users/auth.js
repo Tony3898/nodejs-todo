@@ -66,11 +66,13 @@ class Auth {
   }
 
   isAuthenticated(req) {
+    if (Tony.Config.dev)
+      return true
     return req.isAuthenticated()
   }
 
   checkAuth(req, res, next) {
-    if (req.isAuthenticated()) {
+    if (Tony.Config.dev || req.isAuthenticated()) {
       return next()
     }
     res.redirect("/")
@@ -103,8 +105,19 @@ class Auth {
           email: userdata.email,
           username: userdata.username
         }
+      } else if (Tony.Config.dev) {
+        Tony.Session = Object.assign(Tony.Session, {
+          email: 'tejasrana30898@gmail.com',
+          username: 'tony3898'
+        })
+        return {
+          firstname: 'Tejas',
+          lastname: 'Rana',
+          email: 'tejasrana30898@gmail.com',
+          username: 'tony3898'
+        }
       } else
-        return {message: 'No user logging yet'}
+        throw new Error('No user logging yet')
     } catch (e) {
       throw new Error(e.message)
     }

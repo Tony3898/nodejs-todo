@@ -11,14 +11,15 @@ const renderHtml = (req, res) => {
   let filePath = path.join("ui/pages/" + reqPage + ".html")
   let nav = Tony.Config.nav;
   readFile(filePath, 'utf-8').then(html => {
-    res.render('react.hbs', {
+    res.render('page.hbs', {
       title: nav && nav.sub ? nav.sub.filter((data) => {
         return data.name.toLowerCase() === pagePath;
       }).map((data) => {
         return data.name;
       }) : Tony.Config.project_name,
-      nav: nav && nav.sub ? nav.sub : null,
+      nav: nav ? nav : null,
       html: html,
+      project: Tony.Config.project_name,
       query: req.query
     });
   }).catch(err => {

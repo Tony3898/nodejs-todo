@@ -2,9 +2,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="intro">
-            <h1>Hello {{#if loggedIn}} <span id="username"></span> {{else}}<span>there</span>{{/if}}, welcome to my
+            <h1>{{#if loggedIn}}Welcome back!!! <span id="username"></span> {{else}}<span>Hello there</span>{{/if}},
+                welcome to my
                 project <span class="heart" style="text-transform: uppercase">{{project}}</span></h1>
-            <a href="{{digInUrl}}" class="heart"><h1>Let's dig in</h1></a>
+            <a {{#if loggedIn}} href='/app' {{else}} href="{{digInUrl}} {{/if}}" class="heart"><h1>Let's dig in</h1></a>
             <br>
         </div>
     </div>

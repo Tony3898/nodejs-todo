@@ -8,3 +8,9 @@ mongo_db:
 connection:
   port: 3000
   host: localhost
+
+nav:
+  - name: 'All Todo'
+    path: '/app/todo/home'
+  - name: 'New Todo'
+    path: '/app/todo/new-todo'
