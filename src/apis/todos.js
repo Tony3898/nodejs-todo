@@ -42,6 +42,7 @@ class Todos extends Mongo {
   }
 
   async findAll(options) {
+    console.log(options)
     try {
       await super.connect()
       if (!options.query)
@@ -65,7 +66,6 @@ class Todos extends Mongo {
   }
 
   async update(options) {
-    console.log(options)
     try {
       await super.connect()
       let oldData = await this.findOne(options)

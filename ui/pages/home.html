@@ -18,6 +18,7 @@
       'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
+    body: JSON.stringify({query: {status: 1}})
   }).then(r => {
     if (r.status === 404 || r.status === 200) {
       return r.json()
@@ -35,9 +36,9 @@
             '                    <p>' + todo.desc + '</p>\n' +
             '                </div>\n' +
             '                <div class="todo-list-right">\n' +
-            '                    <button class="btn btn-info edit-todo" data-id=' + todo.todo_id + '><i class="fas fa-pen"></i></button>\n' +
-            '                    <button class="btn btn-success check-todo" data-id=' + todo.todo_id + '><i class="fas fa-check"></i></button>\n' +
-            '                    <button class="btn btn-danger delete-todo" data-id=' + todo.todo_id + '><i class="fas fa-trash"></i></i></button>\n' +
+            '                    <button class="btn btn-info edit-todo" data-id=' + todo.todo_id + ' title="edit"><i class="fas fa-pen"></i></button>\n' +
+            '                    <button class="btn btn-success check-todo" data-id=' + todo.todo_id + ' title="completed"><i class="fas fa-check"></i></button>\n' +
+            '                    <button class="btn btn-danger delete-todo" data-id=' + todo.todo_id + ' title="delete"><i class="fas fa-trash"></i></i></button>\n' +
             '                </div>\n' +
             '            </li>')
       })
@@ -46,6 +47,46 @@
         e.preventDefault()
         let todo_id = parseInt($(this).attr('data-id'))
         window.location.href = '/app/todo/edit-todo?todo_id=' + todo_id
+      })
+
+      $('.check-todo').click(function (e) {
+        e.preventDefault()
+        let todo_id = parseInt($(this).attr('data-id'))
+        $(this).attr('disabled', true).append("  <i class=\"fas fa-spinner fa-spin loading\"></i>");
+        fetch('/api/todo.update', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({query: {todo_id}, update: {status: 2}})
+        }).then(r => {
+          window.location.reload();
+        }).catch(e => {
+          $(this).attr('disabled', false)
+          $(".loading").remove();
+          alert(e.message)
+        })
+      })
+
+      $('.delete-todo').click(function (e) {
+        e.preventDefault()
+        let todo_id = parseInt($(this).attr('data-id'))
+        $(this).attr('disabled', true).append("  <i class=\"fas fa-spinner fa-spin loading\"></i>");
+        fetch('/api/todo.update', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({query: {todo_id}, update: {status: -1}})
+        }).then(r => {
+          window.location.reload();
+        }).catch(e => {
+          $(this).attr('disabled', false)
+          $(".loading").remove();
+          alert(e.message)
+        })
       })
     }
   }).catch(e => {
