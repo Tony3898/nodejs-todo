@@ -1,7 +1,7 @@
 {
-  "name": "@tony3898/socialpointassisment",
+  "name": "@tony3898/nodejs-todo",
   "version": "1.0.0",
-  "description": "socialpointassisment",
+  "description": "nodejs-todo",
   "main": "server.js",
   "author": "Tejas Rana <contact@tejasrana.in> (https://tejasrana.in/)",
   "license": "MIT",
@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/Tony3898/socialpointassisment.git"
+    "url": "git://github.com/Tony3898/nodejs-todo.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
@@ -25,11 +25,11 @@
     "server.js"
   ],
   "bugs": {
-    "url": "https://github.com/Tony3898/socialpointassisment/issues"
+    "url": "https://github.com/Tony3898/nodejs-todo/issues"
   },
-  "homepage": "https://github.com/Tony3898/socialpointassisment",
+  "homepage": "https://github.com/Tony3898/nodejs-todo",
   "keywords": [
-    "socialpointassisment"
+    "nodejs-todo"
   ],
   "dependencies": {
     "chalk": "^4.1.0",
