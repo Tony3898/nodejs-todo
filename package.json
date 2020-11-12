@@ -6,9 +6,6 @@
   "author": "Tejas Rana <contact@tejasrana.in> (https://tejasrana.in/)",
   "license": "MIT",
   "scripts": {
-    "start:server": "nodemon server",
-    "start:ui": "webpack --watch",
-    "build:ui": "webpack --mode production",
     "start": "node server.js"
   },
   "repository": {
@@ -29,7 +26,10 @@
   },
   "homepage": "https://github.com/Tony3898/nodejs-todo",
   "keywords": [
-    "nodejs-todo"
+    "nodejs-todo",
+    "mongo",
+    "passport",
+    "todo"
   ],
   "dependencies": {
     "chalk": "^4.1.0",
